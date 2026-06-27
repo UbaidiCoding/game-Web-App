@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="theme-color" content="#0a0a1a" />
+  <meta name="description" content="Neon Surge — Fast-paced arcade dodger" />
+  <title>Neon Surge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;600&display=swap"rel="stylesheet"/>
+    <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <div id="game-container">
+    <!-- Phaser mounts its canvas here -->
+  </div>
+
+  <!--
+    Loading overlay shown before Phaser initializes.
+    BootScene hides it once assets are ready.
+  -->
+  <div id="initial-loader">
+    <div class="loader-inner">
+      <div class="loader-title">NEON SURGE</div>
+      <div class="loader-bar-wrap">
+        <div class="loader-bar" id="loader-bar"></div>
+      </div>
+      <div class="loader-label" id="loader-label">Initializing…</div>
+    </div>
+  </div>
+
+  <script type="module" src="/main.js"></script>
+</body>
+</html>

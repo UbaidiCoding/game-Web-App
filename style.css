@@ -1,0 +1,127 @@
+/* ============================================================
+   NEON SURGE — Global Styles
+   Canvas sizing, loader, overlays, font setup
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --neon-cyan:    #00f5ff;
+  --neon-magenta: #ff00cc;
+  --neon-yellow:  #ffee00;
+  --neon-green:   #39ff14;
+  --bg-deep:      #0a0a1a;
+  --bg-panel:     rgba(10, 10, 30, 0.92);
+  --text-primary: #e8e8ff;
+  --text-dim:     #6666aa;
+  --font-hud:     'Orbitron', monospace;
+  --font-body:    'Rajdhani', sans-serif;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg-deep);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: none; /* Prevent scroll-bounce on mobile during gameplay */
+}
+
+/* ── Canvas Container ───────────────────────────────────────── */
+
+#game-container {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-deep);
+}
+
+#game-container canvas {
+  display: block;
+  /* Phaser handles sizing; we just ensure crisp pixels */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  /* Subtle outer glow matching neon theme */
+  box-shadow:
+    0 0 40px rgba(0, 245, 255, 0.08),
+    0 0 80px rgba(255, 0, 204, 0.05);
+}
+
+/* ── Initial Loader (shown before Phaser canvas is ready) ──── */
+
+#initial-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: var(--bg-deep);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.6s ease;
+}
+
+#initial-loader.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  width: min(380px, 88vw);
+}
+
+.loader-title {
+  font-family: var(--font-hud);
+  font-size: clamp(1.8rem, 6vw, 3rem);
+  font-weight: 900;
+  letter-spacing: 0.18em;
+  color: var(--neon-cyan);
+  text-shadow:
+    0 0 12px var(--neon-cyan),
+    0 0 30px rgba(0, 245, 255, 0.4);
+  animation: titlePulse 2s ease-in-out infinite;
+}
+
+.loader-bar-wrap {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 245, 255, 0.2);
+}
+
+.loader-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-magenta));
+  border-radius: 3px;
+  transition: width 0.25s ease;
+  box-shadow: 0 0 8px var(--neon-cyan);
+}
+
+.loader-label {
+  font-family: var(--font-hud);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+
+/* ── Keyframes ──────────────────────────────────────────────── */
+
+@keyframes titlePulse {
+  0%, 100% { text-shadow: 0 0 12px var(--neon-cyan), 0 0 30px rgba(0, 245, 255, 0.4); }
+  50%       { text-shadow:
